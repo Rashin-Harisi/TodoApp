@@ -1,4 +1,4 @@
-import { signIn, useSession } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -9,15 +9,15 @@ const SigninPage = () => {
   const router = useRouter();
   const session= useSession();
   //console.log(session)
-  useEffect(()=>{
+  /*useEffect(()=>{
     if (session.status === "authenticated") router.replace('/')
   },[session.status])
-
+*/
   const signInHandler = async() => {
     const res= await signIn("credentials",{
         email, password, redirect: false,
     })
-    if (!res.error) router.push('/')
+    if (!res.error) router.replace('/')
   };
   return (
     <div className="signin-form">
@@ -44,3 +44,18 @@ const SigninPage = () => {
 };
 
 export default SigninPage;
+
+export async function getServerSideProps({req}){
+  const session = await getSession({req})
+  if (session){
+    return{
+      redirect:{
+        destination: "/",
+        permanent: false,
+      }
+      }
+    }
+  return{
+    props:{}
+  }
+}
