@@ -3,15 +3,18 @@ import { VscListSelection } from "react-icons/vsc";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
 import { signOut, useSession } from "next-auth/react";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut,FiLogIn } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
   const { status } = useSession();
-  const router= useRouter()
-  const logoutHandler= ()=>{
-    signOut()
-    router.push('/')
+  const router = useRouter();
+  const logoutHandler = () => {
+    signOut();
+    router.push("/");
+  };
+  const signinHadler= ()=>{
+    router.push('/signin')
   }
 
   return (
@@ -23,7 +26,11 @@ const Layout = ({ children }) => {
             Logout
             <FiLogOut />
           </button>
-        ) : null}
+        ) : (
+            <button onClick={signinHadler}>Sign in
+              <FiLogIn />
+            </button>          
+        )}
       </header>
       <div className="container--main">
         <aside>

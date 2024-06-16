@@ -3,7 +3,6 @@ import Tasks from "../module/Tasks";
 
 const HomePage = () => {
   const [todos, setTodos] = useState([]);
-  //console.log(todos)
   useEffect(() => {
     fetchTodos();
   }, []);

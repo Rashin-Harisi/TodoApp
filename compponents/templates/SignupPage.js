@@ -2,6 +2,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +26,12 @@ const SignupPage = () => {
      })
      const data = await res.json()
      console.log(data)
-     if(data.status === "success") router.push('/signin')
+     if(data.status === "success") {
+      toast.success("Account was created successfully")
+      router.push('/signin')
+    }else{
+      toast.error(data.message)
+    }
   }
   return (
     <div className="signin-form">
@@ -46,6 +53,7 @@ const SignupPage = () => {
         <p>Have an account</p>
         <Link href='/signin'>Sign in</Link>
     </div>
+    <ToastContainer/>
     </div>
   );
 };
