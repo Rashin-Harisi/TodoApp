@@ -33,22 +33,4 @@ export default function Home() {
     </div>
   );
 }
-<<<<<<< HEAD
 
-
-export async function getServerSideProps({req}){
-  const session = await getSession({req})
-  if (!session){
-    return{
-      redirect:{
-        destination: "/signin",
-        permanent: false,
-      }
-      }
-    }
-  return{
-    props:{}
-  }
-}
-=======
->>>>>>> 42593d7 (final check)

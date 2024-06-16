@@ -6,20 +6,7 @@ import { useEffect, useState } from "react";
 const SigninPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
-<<<<<<< HEAD
-  const session= useSession();
-  //console.log(session)
-  /*useEffect(()=>{
-    if (session.status === "authenticated") router.replace('/')
-  },[session.status])
-*/
-  const signInHandler = async() => {
-    const res= await signIn("credentials",{
-        email, password, redirect: false,
-    })
-    if (!res.error) router.replace('/')
-=======
+  const router = useRouter()
   const session = useSession();
   console.log(session)
   useEffect(() => {
@@ -39,8 +26,10 @@ const SigninPage = () => {
     } else {
       toast.error("Login failed. Please check your credentials.");
     }
->>>>>>> 42593d7 (final check)
-  };
+  }
+
+
+
   return (
     <div className="signin-form">
       <h3>Sign in Form</h3>
@@ -66,23 +55,3 @@ const SigninPage = () => {
 };
 
 export default SigninPage;
-
-<<<<<<< HEAD
-export async function getServerSideProps({req}){
-  const session = await getSession({req})
-  if (session){
-    return{
-      redirect:{
-        destination: "/",
-        permanent: false,
-      }
-      }
-    }
-  return{
-    props:{}
-  }
-}
-=======
-
-
->>>>>>> 42593d7 (final check)
